@@ -1,2 +1,2 @@
-**安装库文件**
+**安装**
 > composer require 6du.in/sdk
