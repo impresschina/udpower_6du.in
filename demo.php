@@ -19,8 +19,7 @@ var_dump($response->success, $response->status_code);
 print_r(json_decode($response->body));
 
 //for xml to array
-/*
-try {
+/*try {
     print_r($sdk->xml2array($response->body));
 } catch (Exception $e) {
     print_r($e->getTraceAsString());
