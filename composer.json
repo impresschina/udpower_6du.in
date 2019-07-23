@@ -1,0 +1,21 @@
+{
+  "name": "sixdu/sdk",
+  "description": "The short url service SDK by 6du.in",
+  "authors": [
+    {
+      "name": "Ken"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0",
+    "rmccue/requests": "^1.7",
+    "openlss/lib-array2xml": "^1.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sixdu\\": "src/"
+    }
+  }
+}
