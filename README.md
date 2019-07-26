@@ -1,17 +1,20 @@
  安装
 ------------
 
-> composer require 6du.in/sdk
+~~~
+ composer require 6du.in/sdk
+~~~
 
 调用方法
 ------------
+~~~
+include_once './vendor/autoload.php';
 
-```php
-$appid = 'c81e728d9d4c2f636f067f89cc14862c';
-$accesskey = '80a1ca94-6d67-36d0-b624-5eb819c38dfa';
-$api = 'http://api.dove.io';
+const SecretKey = '54a4be329214c553ICAgICA4454d25898be4ad7gMjU4Mg';
+$api = new \Sixdu\API(SecretKey);
 
-$sdk = new \Sixdu\SixduSDK($appid, $accesskey, $api);
-$urls = ['https://...','https://...','https://...','https://...','https://...'];
-$response = $sdk->make($urls);
-```
+$body = $api->add('http://baidu.com/abc?a=1000');
+print_r($body);
+echo "\n";
+~~~
+调用细节请参考相关DEMO
