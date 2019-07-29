@@ -20,6 +20,7 @@ class API
      */
     const API = 'http://api.6du.in';
 
+
     /**
      * @var Statistics
      */
