@@ -20,7 +20,6 @@ class API
      */
     const API = 'http://api.6du.in';
 
-
     /**
      * @var Statistics
      */
@@ -77,7 +76,8 @@ class API
      */
     public function parse($url)
     {
-        $request = \Requests::get($this->builder('/urls/parse', ['surl' => $url]));
+        $parser = \Spatie\Url\Url::fromString($url);
+        $request = \Requests::get($this->builder('/urls/parse', ['surl' => $url, 'host' => $parser->getHost()]));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
