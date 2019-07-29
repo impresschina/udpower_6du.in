@@ -18,7 +18,7 @@ class API
     /**
      * API URL
      */
-    const API = 'http://xapi.in';
+    const API = 'http://api.6du.in';
 
     /**
      * @var Statistics
