@@ -6,9 +6,7 @@
  * Time: 12:02
  */
 
-namespace Sixdu;
-
-use Riimu\Kit\UrlParser\UriParser;
+namespace Sixdu\V0;
 
 class Statistics
 {
@@ -34,10 +32,8 @@ class Statistics
      */
     public function one($url)
     {
-        $parser = new UriParser();
-        $parse = $parser->parse($url);
-
-        $request = \Requests::get($this->api->builder('/urls/one', array('code' => ltrim($parse->getPath(), "/"))));
+        $parser = \Sixdu\URL::parser($url);
+        $request = \Requests::get($this->api->builder('/urls/one', array('code' => ltrim($parser->path, "/"))));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
@@ -59,15 +55,14 @@ class Statistics
      */
     public function all($url, $begin)
     {
-        $parser = new UriParser();
-        $parse = $parser->parse($url);
+        $parser = \Sixdu\URL::parser($url);
 
         $time = strtotime($begin);
         if ($time === false || strtotime(date('Y-m-d')) > $time) {
             throw new \ErrorException('Please set the correct begin date parameter');
         }
 
-        $request = \Requests::get($this->api->builder('/urls/all', array('code' => ltrim($parse->getPath(), "/"), 'start_day' => $begin)));
+        $request = \Requests::get($this->api->builder('/urls/all', array('code' => ltrim($parser->path, "/"), 'start_day' => $begin)));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
@@ -87,10 +82,9 @@ class Statistics
      */
     public function record($url)
     {
-        $parser = new UriParser();
-        $parse = $parser->parse($url);
+        $parser = \Sixdu\URL::parser($url);
 
-        $request = \Requests::get($this->api->builder('/urls/record', array('code' => ltrim($parse->getPath(), "/"))));
+        $request = \Requests::get($this->api->builder('/urls/record', array('code' => ltrim($parser->path, "/"))));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);

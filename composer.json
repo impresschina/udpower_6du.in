@@ -10,12 +10,13 @@
   "require": {
     "php": ">=5.3.9",
     "rmccue/requests": "^1.7",
-    "riimu/kit-urlparser": "^2.1",
     "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
-      "Sixdu\\": "src/"
+      "Sixdu\\": "src/",
+      "Sixdu\\V0\\": "src/v0",
+      "Sixdu\\V1\\": "src/v1"
     }
   }
 }

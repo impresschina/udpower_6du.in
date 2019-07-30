@@ -8,7 +8,7 @@
 include_once './vendor/autoload.php';
 
 const SecretKey = '54a4be329214c553ICAgICA4454d25898be4ad7gMjU4Mg';
-$api = new \Sixdu\API(SecretKey);
+$api = new \Sixdu\V0\SDK(SecretKey);
 
 try {
     $body = $api->add('http://baidu.com/abc?a=1000');

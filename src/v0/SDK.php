@@ -6,16 +6,14 @@
  * Time: 09:39
  */
 
-namespace Sixdu;
-
-use Riimu\Kit\UrlParser\UriParser;
+namespace Sixdu\V0;
 
 /**
- * Class API
+ * Class SDK
  * @property  Statistics $statistics
  * @package Sixdu
  */
-class API
+class SDK
 {
     /**
      * API URL
@@ -33,7 +31,7 @@ class API
     private $query;
 
     /**
-     * SixduAPI constructor.
+     * SDK constructor.
      * @param $secretKey
      */
     public function __construct($secretKey)
@@ -50,8 +48,6 @@ class API
     {
         return self::API . $path . '?' . http_build_query($this->query + $query);
     }
-
-    //http://admin.6du.in/api/public/index.php?action=add&secretkey=xxxxxx&url=http://www...&host=t.cn&version=1
 
     /** 创建短网址请求
      * @param string $url 将要生成的短网址的网址
@@ -80,9 +76,8 @@ class API
      */
     public function parse($url)
     {
-        $parser = new UriParser();
-        $parse = $parser->parse($url);
-        $request = \Requests::get($this->builder('/urls/parse', array('surl' => $url, 'host' => $parse->getHost())));
+        $parser = \Sixdu\URL::parser($url);
+        $request = \Requests::get($this->builder('/urls/parse', array('surl' => $url, 'host' => $parser->host)));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
@@ -100,7 +95,7 @@ class API
      */
     public function __get($name)
     {
-        if ($name == 'statistics') {
+        if ($name === 'statistics') {
             if (is_null(static::$_statistics))
                 static::$_statistics = new Statistics($this);
             return static::$_statistics;
