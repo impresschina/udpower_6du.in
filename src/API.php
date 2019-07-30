@@ -8,6 +8,8 @@
 
 namespace Sixdu;
 
+use Riimu\Kit\UrlParser\UriParser;
+
 /**
  * Class API
  * @property  Statistics $statistics
@@ -49,6 +51,8 @@ class API
         return self::API . $path . '?' . http_build_query($this->query + $query);
     }
 
+    //http://admin.6du.in/api/public/index.php?action=add&secretkey=xxxxxx&url=http://www...&host=t.cn&version=1
+
     /** 创建短网址请求
      * @param string $url 将要生成的短网址的网址
      * @return array
@@ -56,7 +60,7 @@ class API
      */
     public function add($url)
     {
-        $request = \Requests::get($this->builder('/urls/add', ['lurl' => $url]));
+        $request = \Requests::get($this->builder('/urls/add', array('lurl' => $url)));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
@@ -76,8 +80,9 @@ class API
      */
     public function parse($url)
     {
-        $parser = \Spatie\Url\Url::fromString($url);
-        $request = \Requests::get($this->builder('/urls/parse', ['surl' => $url, 'host' => $parser->getHost()]));
+        $parser = new UriParser();
+        $parse = $parser->parse($url);
+        $request = \Requests::get($this->builder('/urls/parse', array('surl' => $url, 'host' => $parse->getHost())));
         $code = $request->status_code;
         if ($code != 200)
             throw new \ErrorException('Request has an error HTTP status code: ' . $code);
