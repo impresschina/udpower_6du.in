@@ -11,7 +11,7 @@ namespace Sixdu\V0;
 class Statistics
 {
     /**
-     * @var API
+     * @var SDK
      */
     private $api;
 
