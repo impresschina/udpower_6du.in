@@ -38,10 +38,10 @@ class SDK
     }
 
     /**
-     * 正常返回短网址
+     * 正常返回短网址,如果URL是一个数组时返回值就会是数组
      * @param $url
      * @param null $host 可以指定生成短网址的 host
-     * @return string
+     * @return string|array
      * @throws \ErrorException
      */
     public function add($url, $host = null)
