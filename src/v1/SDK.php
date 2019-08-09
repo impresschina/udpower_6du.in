@@ -14,7 +14,7 @@ class SDK
     /**
      * API URL
      */
-    const API = 'http://admin.6du.in/api/public/index.php';
+    const API = 'http://apis.6du.in/index.php';
 
     /**
      * statistics type
