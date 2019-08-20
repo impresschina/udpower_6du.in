@@ -17,6 +17,12 @@ class SDK
     const API = 'http://apis.6du.in/v1';
 
     /**
+     * statistics type
+     * @var array
+     */
+    private $types = array('1000', '1001', '1002');
+
+    /**
      * @var
      */
     private $query;
@@ -88,5 +94,43 @@ class SDK
             $this->error($request->status_code, @$body['code'], @$body['message']);
 
         return $body['url'];
+    }
+
+    /**
+     * @param $address
+     * @return mixed
+     * @throws \ErrorException
+     */
+    public function ipinfo($address)
+    {
+        if (filter_var($address, FILTER_VALIDATE_IP) === false) {
+            throw new \ErrorException('The $value parameter invalid it must be a ip address.');
+        }
+
+        $request = \Requests::get($this->builder('ipinfo', array('address' => $address)));
+        $body = json_decode($request->body, true);
+        if ($request->status_code != 200)
+            $this->error($request->status_code, @$body['code'], @$body['message']);
+
+        return $body;
+    }
+
+    /**
+     * @param int $type
+     * @param string $url short url
+     * @return array
+     * @throws \ErrorException
+     */
+    public function statistics($type, $url)
+    {
+        if (!in_array($type, $this->types))
+            throw new \ErrorException('The $type parameter invalid');
+
+        $request = \Requests::get($this->builder('statistics', array('type' => $type, 'url' => $url)));
+        $body = json_decode($request->body, true);
+        if ($request->status_code != 200)
+            $this->error($request->status_code, @$body['code'], @$body['message']);
+
+        return $body;
     }
 }
