@@ -24,6 +24,10 @@ try {
     print_r($body);
     echo "\n";
 
+    $body = $api->statistics(1000, 'http://6du.in/0p66kkf');
+    print_r($body);
+    echo "\n";
+
 } catch (ErrorException $e) {
     echo $e->getMessage() . "\n" . $e->getTraceAsString();
     echo "\n";

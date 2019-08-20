@@ -97,6 +97,7 @@ class SDK
     }
 
     /**
+     * IP信息查询
      * @param $address
      * @return mixed
      * @throws \ErrorException
@@ -116,6 +117,7 @@ class SDK
     }
 
     /**
+     * 短网址统计 $type 的值请查询接口文档
      * @param int $type
      * @param string $url short url
      * @return array
